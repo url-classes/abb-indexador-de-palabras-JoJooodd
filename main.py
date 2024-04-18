@@ -1,9 +1,18 @@
 
+# Integrantes
+
+# Carlos Daniel Gómez Aguilar - 1506323
+# Josué David Bautista Orózco
+
+from binary_search_tree import BinarySearchTree
+
+
 # Abre el archivo en modo de lectura ('r')
-with open('ejemplo.txt', 'r') as file:
+with open('mayda cayo.txt', 'r') as file:
     # Lee todo el contenido del archivo
     contenido = file.read()
     print(contenido)
+    print('leyendo archivo', file.name)
 
 
 def comparar_alfabeticamente(texto1, texto2):
@@ -32,7 +41,7 @@ def main():
     texto2 = "perro"
     print(comparar_alfabeticamente(texto1, texto2))  # Salida: hola va primero
 
-    texto3 = "holap"
+    texto3 = "holav"
     texto4 = "holato"
     print(comparar_alfabeticamente(texto3, texto4))  # Salida: holap va primero
 
