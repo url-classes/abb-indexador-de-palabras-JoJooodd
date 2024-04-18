@@ -1,0 +1,5 @@
+# contenido del fichero ejemplo.txt
+Contenido de la primera linea
+Contenido de la segunda linea
+Contenido de la tercera linea
+Contenido de la cuarta linea
