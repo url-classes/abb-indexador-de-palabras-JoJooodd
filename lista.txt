@@ -1,1 +1,1 @@
-una lista o secuencia es un tipo de datos abstracto que representa un número finito de valores ordenados donde el mismo valor puede aparecer más de una vez
+una lista o secuencia es un tipo de datos abstracto que representa un numero finito de valores ordenados donde el mismo valor puede aparecer mas de una vez

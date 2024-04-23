@@ -5,14 +5,35 @@
 # Josué David Bautista Orózco
 
 from binary_search_tree import BinarySearchTree
+import os
 
 
-# Abre el archivo en modo de lectura ('r')
-with open('mayda cayo.txt', 'r') as file:
-    # Lee todo el contenido del archivo
-    contenido = file.read()
-    print(contenido)
-    print('leyendo archivo', file.name)
+arbol_indexador = BinarySearchTree()
+
+
+def leer_archivos():
+    # Obtener la lista de archivos en el directorio actual
+    archivos = os.listdir('.')
+
+    # Iterar sobre cada archivo en la lista
+    for archivo in archivos:
+        # Verificar si el archivo es un archivo regular (no un directorio)
+        if os.path.isfile(archivo) and archivo.endswith('.txt'):
+            # Abre el archivo
+            with open(archivo) as archivo_leer:
+
+                '''# Lee todo el contenido del archivo
+                contenido = archivo_leer.read()
+                print(contenido)'''
+
+                for lineas in archivo_leer:
+                    print(lineas.split())
+                    split = lineas.split()
+                    for i in split:
+                        arbol_indexador.insert((i.lower()))
+                        print(i)
+
+                '''print('Leyendo archivo:', archivo_leer.name)'''
 
 
 def comparar_alfabeticamente(texto1, texto2):
@@ -39,11 +60,14 @@ def main():
     # Ejemplo de uso
     texto1 = "hola"
     texto2 = "perro"
-    print(comparar_alfabeticamente(texto1, texto2))  # Salida: hola va primero
 
     texto3 = "holav"
     texto4 = "holato"
-    print(comparar_alfabeticamente(texto3, texto4))  # Salida: holap va primero
+
+    leer_archivos()
+
+    inorder = arbol_indexador.inorder()
+    print(inorder)
 
 
 main()
