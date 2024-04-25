@@ -12,10 +12,74 @@ class BinarySearchTree(Generic[T]):
         if subtree is None:
             return "None"
         else:
-            root = str(subtree.data)    # obtener la raiz del arbol
-            left = self.__preorder(subtree.left) # se va ir al subarbol izquierda
-            right = self.__preorder(subtree.right) # se va ir al subarbol derecho
+            '''root = str(subtree.data)    # obtener la raiz del arbol
+            left = self.__preorder(subtree.left)    # se va ir al subarbol izquierda
+            right = self.__preorder(subtree.right)  # se va ir al subarbol derecho
             result = f"{root} ({left}, {right})"
+            return result'''
+            left = self.__preorder(
+                subtree.left) if subtree.left is not None else ""  # Recorre el subárbol izquierdo si existe
+            # if subtree.left is not None else "" verifica si es una valor diferente a None y lo ingresa
+            right = self.__preorder(
+                subtree.right) if subtree.right is not None else ""  # Recorre el subárbol derecho si existe
+            # if subtree.right is not None else "" verifica si es una valor diferente a None y lo ingresa
+            root = str(subtree.data)  # Obtiene la raíz del árbol
+            if left and right:  # Verifica si tanto el subárbol izquierdo como el derecho contienen valores
+                result = f"{root} {left} {right}"  # Coloca en el resultado sin incluir los None
+            elif left:  # Si solo hay un subárbol izquierdo con valor
+                result = f"{root} {left}"
+            elif right:  # Si solo hay un subárbol derecho con valor
+                result = f"{root} {right}"
+            else:  # Si es una hoja
+                result = root
+            return result
+
+    def __inorder(self, subtree: Node | None) -> str:
+        if subtree is None:
+            return "None"
+        else:
+            '''left = self.__inorder(subtree.left)    # se va ir al subarbol izquierda I
+            root = str(subtree.data)    # obtener la raiz del arbol R
+            right = self.__inorder(subtree.right)  # se va ir al subarbol derecho D
+            result = f"{left} ({root}, {right})"
+            return result'''
+            left = self.__inorder(
+                subtree.left) if subtree.left is not None else ""  # Recorre el subárbol izquierdo si existe
+            root = str(subtree.data)  # Obtiene la raíz del árbol
+            right = self.__inorder(
+                subtree.right) if subtree.right is not None else ""  # Recorre el subárbol derecho si existe
+            if left and right:  # Verifica si tanto el subárbol izquierdo como el derecho contienen valores
+                result = f"{left} {root} {right}"  # Coloca en el resultado sin incluir los None
+            elif left:  # Si solo hay un subárbol izquierdo con valor
+                result = f"{left} {root}"
+            elif right:  # Si solo hay un subárbol derecho con valor
+                result = f"{root} {right}"
+            else:  # Si es una hoja
+                result = root
+            return result
+
+    def __postorder(self, subtree: Node | None) -> str:
+        if subtree is None:
+            return "None"
+        else:
+            '''left = self.__postorder(subtree.left)    # se va ir al subarbol izquierda I
+            right = self.__postorder(subtree.right)  # se va ir al subarbol derecho D
+            root = str(subtree.data)    # obtener la raiz del arbol R
+            result = f"{left} ({right}, {root})"
+            return result'''
+            left = self.__postorder(
+                subtree.left) if subtree.left is not None else ""  # Recorre el subárbol izquierdo si existe
+            right = self.__postorder(
+                subtree.right) if subtree.right is not None else ""  # Recorre el subárbol derecho si existe
+            root = str(subtree.data)  # Obtiene la raíz del árbol
+            if left and right:  # Verifica si tanto el subárbol izquierdo como el derecho contienen valores
+                result = f"{left} {right} {root}"  # Coloca en el resultado sin incluir los None
+            elif left:  # Si solo hay un subárbol izquierdo con valor
+                result = f"{left} {root}"
+            elif right:  # Si solo hay un subárbol derecho con valor
+                result = f"{right} {root}"
+            else:  # Si es una hoja
+                result = root
             return result
 
     def __search(self, ref: T, subtree: Node | None, path: str = "") -> str:
@@ -32,6 +96,12 @@ class BinarySearchTree(Generic[T]):
 
     def preorder(self):
         return self.__preorder(self.__root)
+
+    def inorder(self):
+        return self.__inorder(self.__root)
+
+    def postorder(self):
+        return self.__postorder(self.__root)
 
     def __insert(self, data: T, subtree: Node[T]):
         if data < subtree.data:
