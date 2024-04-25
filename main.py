@@ -2,7 +2,7 @@
 # Integrantes
 
 # Carlos Daniel Gómez Aguilar - 1506323
-# Josué David Bautista Orózco
+# Josué David Bautista Orózco - 1532523
 
 from binary_search_tree import BinarySearchTree
 import os
