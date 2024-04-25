@@ -27,11 +27,10 @@ def leer_archivos():
                 print(contenido)'''
 
                 for lineas in archivo_leer:
-                    print(lineas.split())
+
                     split = lineas.split()
                     for i in split:
                         arbol_indexador.insert((i.lower()))
-                        print(i)
 
                 '''print('Leyendo archivo:', archivo_leer.name)'''
 
@@ -56,18 +55,54 @@ def comparar_alfabeticamente(texto1, texto2):
         return "Ambos textos son iguales en términos alfabéticos"
 
 
+def mostrar_info_palabra(palabra):
+    apariciones = {}
+    for archivo in os.listdir('.'):
+        if os.path.isfile(archivo) and archivo.endswith('.txt'):
+            with open(archivo) as archivo_leer:
+                veces_en_archivo = 0
+                for linea in archivo_leer:
+                    palabras_linea = linea.split()
+                    veces = palabras_linea.count(palabra)
+                    veces_en_archivo += veces
+                if veces_en_archivo > 0:
+                    if palabra not in apariciones:
+                        apariciones[palabra] = {"archivos": [], "veces": []}
+                    apariciones[palabra]["archivos"].append(archivo)
+                    apariciones[palabra]["veces"].append(veces_en_archivo)
+
+    if palabra in apariciones:
+        archivos = ", ".join(apariciones[palabra]["archivos"])
+        veces = ", ".join(map(str, apariciones[palabra]["veces"]))
+        print(f"Palabra: {palabra}\n"
+              f"Archivos: ({archivos})\n"
+              f"Veces: ({veces})")
+    else:
+        print("La palabra no se encuentra en ningún archivo.")
+
+
 def main():
-    # Ejemplo de uso
-    texto1 = "hola"
-    texto2 = "perro"
-
-    texto3 = "holav"
-    texto4 = "holato"
-
     leer_archivos()
+    while True:
+        print("\nMenú:")
+        print("1. Ver árbol binario de búsqueda")
+        print("2. Mostrar información sobre una palabra")
+        print("3. Salir")
 
-    inorder = arbol_indexador.inorder()
-    print(inorder)
+        opcion = input("Ingrese el número de la opción que desea ejecutar: ")
+
+        if opcion == "1":
+            print("\nÁrbol binario de búsqueda:")
+            inorder = arbol_indexador.inorder()
+            print(inorder)
+        elif opcion == "2":
+            palabra = input("Ingrese la palabra de la que desea ver información: ")
+            mostrar_info_palabra(palabra.lower())
+        elif opcion == "3":
+            print("\nSaliendo del programa...")
+            break
+        else:
+            print("\nOpción inválida. Por favor, ingrese una opción válida.")
 
 
 main()
